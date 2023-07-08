@@ -1,0 +1,12 @@
+{
+  "workspaceId": "41803",
+  "designSystemId": "44607",
+  "designSystemVersionId": "57004",
+  "exporterId": "a4bfe6ec-416d-4638-bfba-18c3baeefc73",
+  "workspaceName": "SiraaS",
+  "designSystemName": "My Design System",
+  "designSystemVersionName": "Initial",
+  "exporterName": "Dark theme",
+  "write_to": "./src/supernova/tokens",
+  "description": "Note to our fellow developers: Install Supernova integration from the VSCode marketplace and then our  Dark theme exporter will synchronize design data and generate appropriate code from the  Initial design system every time you request it through the extension interface, fully automatically."
+}
