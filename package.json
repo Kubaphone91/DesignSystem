@@ -10,7 +10,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "token-engine:fetch": "figma-token-engine",
     "build": "rollup -c --bundleConfigAsCjs",
     "watch": "rollup --watch -c --bundleConfigAsCjs",
     "clean": "rimraf ./dist",
@@ -18,7 +17,8 @@
     "release": "yarn build && auto shipit",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_21732f9de436759"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
@@ -71,5 +71,7 @@
     "react-dom": {
       "optional": true
     }
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "learnstorybook-design-system-template@0.1.0"
 }

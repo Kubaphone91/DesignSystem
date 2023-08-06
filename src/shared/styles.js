@@ -11,8 +11,8 @@ export const background = {
 
 export const color = {
   // Palette
-  primary: '#FF4785', // coral
-  secondary: '#1EA7FD', // ocean
+  primary: '#3A819F', // coral
+  secondary: '#7C839B', // ocean
   tertiary: '#DDDDDD',
 
   orange: '#FC521F',
@@ -43,13 +43,13 @@ export const color = {
 
 export const spacing = {
   padding: {
-    small: 10,
-    medium: 20,
-    large: 30,
+    small: 8,
+    medium: 16,
+    large: 24,
   },
   borderRadius: {
-    small: 5,
-    default: 10,
+    small: 8,
+    default: 16,
   },
 };
 
