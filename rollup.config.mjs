@@ -3,11 +3,11 @@ import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import typescript from '@rollup/plugin-typescript';
-import dts from 'rollup-plugin-dts';
-
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
+// rollup-plugin-dts ships { default: fn } — use createRequire to avoid CJS interop issues
+const { default: dts } = requireFile('rollup-plugin-dts');
 
 const external = [
   'react',
