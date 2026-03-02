@@ -12,10 +12,14 @@ const meta: Meta<typeof Avatar> = {
 export default meta;
 type Story = StoryObj<typeof Avatar>;
 
+// Inline 1×1 transparent PNG — avoids external network requests in Chromatic
+const PLACEHOLDER_IMG =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+
 export const WithImage: Story = {
   render: () => (
     <Avatar>
-      <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+      <AvatarImage src={PLACEHOLDER_IMG} alt="User avatar" />
       <AvatarFallback>SC</AvatarFallback>
     </Avatar>
   ),
@@ -24,13 +28,11 @@ export const WithImage: Story = {
 export const WithFallback: Story = {
   render: () => (
     <Avatar>
-      <AvatarImage src="/broken-image.png" alt="User" />
       <AvatarFallback>JD</AvatarFallback>
     </Avatar>
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    // Fallback renders when image fails
     expect(canvas.getByText('JD')).toBeInTheDocument();
   },
 };

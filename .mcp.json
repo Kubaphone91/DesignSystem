@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "storybook-mcp": {
+      "type": "http",
+      "url": "https://64a90edcb270d2de1775198f-lwethohbqe.chromatic.com/mcp"
+    }
+  }
+}

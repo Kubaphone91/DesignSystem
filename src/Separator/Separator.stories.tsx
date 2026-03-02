@@ -22,7 +22,8 @@ export const Horizontal: Story = {
   render: () => (
     <div className="w-64">
       <p className="text-sm">Above</p>
-      <Separator className="my-2" />
+      {/* decorative={false} gives role="separator" for ARIA; default is decorative=true */}
+      <Separator className="my-2" decorative={false} />
       <p className="text-sm">Below</p>
     </div>
   ),
