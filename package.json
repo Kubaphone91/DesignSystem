@@ -19,6 +19,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
+    "postbuild": "node scripts/build-css.js",
     "watch": "rollup --watch -c --bundleConfigAsCjs",
     "clean": "rimraf ./dist",
     "prebuild": "yarn clean",
@@ -27,6 +28,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_21732f9de436759"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "devDependencies": {
     "@radix-ui/react-avatar": "^1.1.3",

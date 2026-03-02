@@ -1,0 +1,67 @@
+/**
+ * @Kubaphone91/design-system — theme CSS variables.
+ *
+ * Import this once in your app entry point (before your own Tailwind imports)
+ * to unlock design-system theming. Your Tailwind config must extend colors
+ * with hsl(var(--primary)) etc. — see the DesignSystem README.
+ *
+ * Usage:
+ *   import '@Kubaphone91/design-system/styles.css';
+ *
+ * Apply a theme by adding the class to a wrapper element:
+ *   <div class="brand-a-theme"> ... </div>
+ */
+
+/* ─── Base theme (neutral defaults) ─────────────────────────────────────── */
+:root,
+.base-theme {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+
+  --radius: 0.5rem;
+}
+
+/* ─── Brand A — green primary (#0f992e → hsl(133 82% 33%)), monospace ────── */
+.brand-a-theme {
+  --primary: 133 82% 33%;
+  --primary-foreground: 0 0% 100%;
+
+  --muted-foreground: 0 0% 64%;
+
+  /* Pill-shaped buttons */
+  --radius: 3rem;
+}
+
+/* ─── Brand B — purple primary (#840977 → hsl(306 87% 28%)), sans-serif ──── */
+.brand-b-theme {
+  --primary: 306 87% 28%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Sharp-cornered buttons */
+  --radius: 0.25rem;
+}
