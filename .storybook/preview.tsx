@@ -1,7 +1,7 @@
 import type { Preview, Decorator } from '@storybook/react';
 import '../src/styles/globals.css';
 
-const THEMES = ['base', 'brand-a', 'brand-b'] as const;
+const THEMES = ['base', 'brand-a', 'brand-b', 'gladio'] as const;
 type Theme = (typeof THEMES)[number];
 
 const withTheme: Decorator = (Story, context) => {
@@ -25,6 +25,7 @@ const preview: Preview = {
           { value: 'base', title: 'Base' },
           { value: 'brand-a', title: 'Brand A (Green)' },
           { value: 'brand-b', title: 'Brand B (Purple)' },
+          { value: 'gladio', title: 'Gladio (Cyan)' },
         ],
         dynamicTitle: true,
       },

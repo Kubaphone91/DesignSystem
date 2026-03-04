@@ -28,6 +28,18 @@ const {
   Label,
   Separator,
   Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
+  // Group A
+  Skeleton,
+  // Group B
+  Textarea,
+  // Group C — Tooltip (no portal content, just provider + trigger)
+  TooltipProvider, Tooltip, TooltipTrigger,
+  // Group D
+  DropdownMenu, DropdownMenuTrigger,
+  // Group E
+  Toggle,
+  // Group F
+  Table, TableHeader, TableBody, TableRow, TableHead, TableCell,
 } = pkg;
 
 // ── Test matrix ──────────────────────────────────────────────────────────────
@@ -87,6 +99,62 @@ const tests = [
         React.createElement(CardFooter, null,
           React.createElement(Button, null, 'Action'),
         ),
+      ),
+  },
+  // ── Group A ─────────────────────────────────────────────────────────────────
+  {
+    name: 'Skeleton',
+    render: () => React.createElement(Skeleton, { className: 'h-4 w-32' }),
+  },
+  // ── Group B ─────────────────────────────────────────────────────────────────
+  {
+    name: 'Textarea',
+    render: () => React.createElement(Textarea, { placeholder: 'Type here...' }),
+  },
+  // ── Group C ─────────────────────────────────────────────────────────────────
+  {
+    name: 'Tooltip (provider + trigger only)',
+    render: () =>
+      React.createElement(TooltipProvider, null,
+        React.createElement(Tooltip, null,
+          React.createElement(TooltipTrigger, null,
+            React.createElement(Button, { variant: 'outline' }, 'Hover me')
+          )
+        )
+      ),
+  },
+  // ── Group D ─────────────────────────────────────────────────────────────────
+  {
+    name: 'DropdownMenu (trigger only)',
+    render: () =>
+      React.createElement(DropdownMenu, null,
+        React.createElement(DropdownMenuTrigger, null,
+          React.createElement(Button, { variant: 'outline' }, 'Open')
+        )
+      ),
+  },
+  // ── Group E ─────────────────────────────────────────────────────────────────
+  {
+    name: 'Toggle',
+    render: () => React.createElement(Toggle, null, 'Toggle'),
+  },
+  // ── Group F ─────────────────────────────────────────────────────────────────
+  {
+    name: 'Table (simple)',
+    render: () =>
+      React.createElement(Table, null,
+        React.createElement(TableHeader, null,
+          React.createElement(TableRow, null,
+            React.createElement(TableHead, null, 'Name'),
+            React.createElement(TableHead, null, 'Value'),
+          )
+        ),
+        React.createElement(TableBody, null,
+          React.createElement(TableRow, null,
+            React.createElement(TableCell, null, 'Foo'),
+            React.createElement(TableCell, null, '42'),
+          )
+        )
       ),
   },
 ];
