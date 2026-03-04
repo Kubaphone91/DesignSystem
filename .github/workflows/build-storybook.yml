@@ -1,0 +1,80 @@
+name: Build Storybook → Chromatic + GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+# Required for GitHub Pages OIDC-based deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment at a time; don't cancel in-progress so it finishes
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # ── Dependency cache ───────────────────────────────────────────────────
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - name: Restore Yarn cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: yarn-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            yarn-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # ── Storybook build cache ──────────────────────────────────────────────
+      - name: Restore Storybook build cache
+        id: sb-cache
+        uses: actions/cache@v4
+        with:
+          path: storybook-static
+          key: storybook-${{ hashFiles('yarn.lock', 'src/**', '.storybook/**') }}
+
+      - name: Build Storybook
+        if: steps.sb-cache.outputs.cache-hit != 'true'
+        run: yarn build-storybook
+
+      # ── Chromatic visual regression ────────────────────────────────────────
+      - name: Run Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+          storybookBuildDir: storybook-static
+          exitZeroOnChanges: true
+
+      # ── GitHub Pages deployment ────────────────────────────────────────────
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: storybook-static
+
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

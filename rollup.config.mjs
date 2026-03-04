@@ -2,18 +2,28 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import { babel } from '@rollup/plugin-babel';
-
-// This is required to read package.json file when
-// using Native ES modules in Node.js
-// https://rollupjs.org/command-line-interface/#importing-package-json
+import typescript from '@rollup/plugin-typescript';
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
+// rollup-plugin-dts ships { default: fn } — use createRequire to avoid CJS interop issues
+const { default: dts } = requireFile('rollup-plugin-dts');
+
+const external = [
+  'react',
+  'react-dom',
+  'react/jsx-runtime',
+  /^@radix-ui\/.*/,
+  'class-variance-authority',
+  'clsx',
+  'tailwind-merge',
+  'lucide-react',
+];
 
 export default [
+  // CJS + ESM bundles
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: [
       {
         file: packageJson.main,
@@ -29,16 +39,23 @@ export default [
     ],
     plugins: [
       peerDepsExternal(),
-      resolve({
-        extensions: ['.js', '.jsx'],
-      }),
+      resolve({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }),
       commonjs(),
-      terser(),
-      babel({
-        extensions: ['.js', '.jsx'],
-        exclude: 'node_modules/**',
+      typescript({
+        tsconfig: './tsconfig.json',
+        declaration: false,
       }),
+      terser(),
     ],
-    external: ['react', 'react-dom', '@emotion/react', '@emotion/styled'],
+    external,
+  },
+  // Type declarations
+  {
+    input: 'src/index.ts',
+    output: [{ file: packageJson.types, format: 'esm' }],
+    plugins: [
+      dts({ tsconfig: './tsconfig.json' }),
+    ],
+    external: [/\.css$/],
   },
 ];
