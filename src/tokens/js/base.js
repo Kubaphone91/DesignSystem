@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 07 Dec 2023 04:50:21 GMT
+ * Generated on Wed, 04 Mar 2026 05:04:50 GMT
  */
 
 export const SpacingBaseUnit = "8px";

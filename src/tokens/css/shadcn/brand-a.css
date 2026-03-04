@@ -1,7 +1,7 @@
 .brand-a-theme {
-  --color-primary-default: #0f992e;
-  --color-primary-hover: #0d8227;
-  --color-primary-disabled: #c2d0dc;
+  --color-primary-default: 133 82% 33%;
+  --color-primary-hover: 133 82% 28%;
+  --color-primary-disabled: 208 27% 81%;
   --button-radius: 48px;
   --button-padding-left: 16px;
   --button-padding-right: 16px;
@@ -16,7 +16,7 @@
   --button-typography-sm-font-size: 0.75rem;
   --button-typography-sm-text-case: none;
   --button-font-family: 'Consolas', Courier, monospace;
-  --color-disabled-text: #a3a3a3;
-  --color-disabled-background: #f5f5f5;
-  --color-disabled-border: #adadad;
+  --color-disabled-text: 0 0% 64%;
+  --color-disabled-background: 0 0% 96%;
+  --color-disabled-border: 0 0% 68%;
 }
